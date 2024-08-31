@@ -1,6 +1,9 @@
 package domain
 
-import "time"
+import (
+	"context"
+	"time"
+)
 
 type UserRoleType string
 
@@ -18,4 +21,18 @@ type User struct {
 	Role      UserRoleType `gorm:"type:varchar(255);default:GUEST"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
+}
+
+type UserRepository interface {
+	CreateUser(ctx context.Context, loginID string, hashedPassword string) (*User, error)
+	GetUser(ctx context.Context, id int) (*User, error)
+	UpdateUser(ctx context.Context, loginID *string, hashedPassword *string, email *string) (*User, error)
+	DeleteUser(ctx context.Context, id int) (*User, error)
+}
+
+type UserUsecase interface {
+	CreateUser(ctx context.Context, loginID string, hashedPassword string) (*User, error)
+	GetUser(ctx context.Context, id int) (*User, error)
+	UpdateUser(ctx context.Context, loginID *string, hashedPassword *string, email *string) (*User, error)
+	DeleteUser(ctx context.Context, id int) (*User, error)
 }
