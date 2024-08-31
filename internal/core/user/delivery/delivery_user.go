@@ -8,19 +8,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-type userDelivery struct {
+type UserDelivery struct {
 	userUsecase domain.UserUsecase
 }
 
-func NewUserDelivery(userUsecase domain.UserUsecase) userDelivery {
-	userDelivery := userDelivery{
+func NewUserDelivery(userUsecase domain.UserUsecase) UserDelivery {
+	userDelivery := UserDelivery{
 		userUsecase: userUsecase,
 	}
 
 	return userDelivery
 }
 
-func (d *userDelivery) CreateUser(c *fiber.Ctx) error {
+func (d *UserDelivery) CreateUser(c *fiber.Ctx) error {
 	body := dto.CreateUserRequest{}
 	if err := c.BodyParser(&body); err != nil {
 		return err

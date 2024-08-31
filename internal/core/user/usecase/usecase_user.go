@@ -7,19 +7,19 @@ import (
 	"toktok-backend-v2/internal/core/user/utils"
 )
 
-type userUsecase struct {
+type UserUsecase struct {
 	userRepository domain.UserRepository
 }
 
 func NewUserUsecase(userRepository domain.UserRepository) domain.UserUsecase {
-	userUsecase := userUsecase{
+	userUsecase := UserUsecase{
 		userRepository: userRepository,
 	}
 
 	return &userUsecase
 }
 
-func (u *userUsecase) CreateUser(ctx context.Context, loginID string, password string) (*domain.User, error) {
+func (u *UserUsecase) CreateUser(ctx context.Context, loginID string, password string) (*domain.User, error) {
 	hashedPassword, err := utils.HashPassword(password)
 	if err != nil {
 		return nil, err
@@ -28,11 +28,11 @@ func (u *userUsecase) CreateUser(ctx context.Context, loginID string, password s
 	return u.userRepository.CreateUser(ctx, loginID, hashedPassword)
 }
 
-func (u *userUsecase) GetUser(ctx context.Context, id int) (*domain.User, error) {
+func (u *UserUsecase) GetUser(ctx context.Context, id int) (*domain.User, error) {
 	return u.userRepository.GetUser(ctx, id)
 }
 
-func (u *userUsecase) UpdateUser(ctx context.Context, id int, loginID *string, password *string, confirmPassword *string, email *string) (*domain.User, error) {
+func (u *UserUsecase) UpdateUser(ctx context.Context, id int, loginID *string, password *string, confirmPassword *string, email *string) (*domain.User, error) {
 	queriedUser, err := u.userRepository.GetUser(ctx, id)
 	if err != nil {
 		return nil, err
@@ -67,6 +67,6 @@ func (u *userUsecase) UpdateUser(ctx context.Context, id int, loginID *string, p
 	return updatedUser, nil
 }
 
-func (u *userUsecase) DeleteUser(ctx context.Context, id int) (*domain.User, error) {
+func (u *UserUsecase) DeleteUser(ctx context.Context, id int) (*domain.User, error) {
 	return u.userRepository.DeleteUser(ctx, id)
 }
