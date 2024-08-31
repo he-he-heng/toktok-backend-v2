@@ -12,7 +12,7 @@ type User struct {
 	ID        int
 	LoginID   int
 	Password  string
-	Email     *string
+	Email     *string // nullable
 	Role      UserRoleType
 	CreatedAt string
 	UpdatedAt string
