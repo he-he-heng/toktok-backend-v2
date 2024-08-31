@@ -1,8 +1,8 @@
 package delivery
 
 import (
-	"toktok-backend-v2/internal/domain"
-	"toktok-backend-v2/internal/user/delivery/dto"
+	"toktok-backend-v2/internal/core/domain"
+	"toktok-backend-v2/internal/core/user/delivery/dto"
 	"toktok-backend-v2/pkg/validator"
 
 	"github.com/gofiber/fiber/v2"
@@ -10,6 +10,14 @@ import (
 
 type userDelivery struct {
 	userUsecase domain.UserUsecase
+}
+
+func NewUserDelivery(userUsecase domain.UserUsecase) userDelivery {
+	userDelivery := userDelivery{
+		userUsecase: userUsecase,
+	}
+
+	return userDelivery
 }
 
 func (d *userDelivery) CreateUser(c *fiber.Ctx) error {

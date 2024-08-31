@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	"toktok-backend-v2/internal/domain"
+	"toktok-backend-v2/internal/core/domain"
 
 	"gorm.io/gorm"
 )

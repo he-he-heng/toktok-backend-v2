@@ -3,8 +3,8 @@ package usecase
 import (
 	"context"
 	"errors"
-	"toktok-backend-v2/internal/domain"
-	"toktok-backend-v2/internal/user/utils"
+	"toktok-backend-v2/internal/core/domain"
+	"toktok-backend-v2/internal/core/user/utils"
 )
 
 type userUsecase struct {
