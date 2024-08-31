@@ -1,0 +1,15 @@
+[database]
+user = "root"
+password = "password"
+host = "localhost"
+port = "3306"
+database = "toktok"
+maxIdleConns = 10
+maxOpenConns = 100
+ConnMaxLifeTime = 30
+
+
+[token]
+key = "7d09427106e91ed528c8275dc011b1790416b762adbf65d2ac937fe7eb6627b66d182b5c857b12a88d40cc0508c48e16e1ba8301648c7401fb38957979d17970"
+accessDuration = "3h"
+refreshDuration = "2160h" # 90 day
