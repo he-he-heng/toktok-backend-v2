@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"context"
 	"toktok-backend-v2/internal/domain"
 
 	"gorm.io/gorm"
@@ -18,13 +19,13 @@ func NewUserRepository(db *gorm.DB) *userRepository {
 	return &userRepository
 }
 
-func (r *userRepository) CreateUser(loginID string, hashedPassword string) (*domain.User, error) {
+func (r *userRepository) CreateUser(ctx context.Context, loginID string, hashedPassword string) (*domain.User, error) {
 	value := domain.User{
 		LoginID:  loginID,
 		Password: hashedPassword,
 	}
 
-	err := r.db.Create(&value).Error
+	err := r.db.WithContext(ctx).Create(&value).Error
 	if err != nil {
 		return nil, err
 	}
@@ -32,9 +33,9 @@ func (r *userRepository) CreateUser(loginID string, hashedPassword string) (*dom
 	return &value, nil
 }
 
-func (r *userRepository) GetUser(id int) (*domain.User, error) {
+func (r *userRepository) GetUser(ctx context.Context, id int) (*domain.User, error) {
 	dest := domain.User{}
-	err := r.db.First(&dest, id).Error
+	err := r.db.WithContext(ctx).First(&dest, id).Error
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +43,7 @@ func (r *userRepository) GetUser(id int) (*domain.User, error) {
 	return &dest, nil
 }
 
-func (r *userRepository) UpdateUser(loginID *string, hashedPassword *string, email *string) (*domain.User, error) {
+func (r *userRepository) UpdateUser(ctx context.Context, loginID *string, hashedPassword *string, email *string) (*domain.User, error) {
 	value := domain.User{}
 
 	if loginID != nil {
@@ -57,7 +58,7 @@ func (r *userRepository) UpdateUser(loginID *string, hashedPassword *string, ema
 		value.Email = email
 	}
 
-	err := r.db.Save(&value).Error
+	err := r.db.WithContext(ctx).Save(&value).Error
 	if err != nil {
 		return nil, err
 	}
@@ -65,9 +66,9 @@ func (r *userRepository) UpdateUser(loginID *string, hashedPassword *string, ema
 	return &value, nil
 }
 
-func (r *userRepository) DeleteUser(id int) (*domain.User, error) {
+func (r *userRepository) DeleteUser(ctx context.Context, id int) (*domain.User, error) {
 	value := domain.User{}
-	err := r.db.Delete(&value, id).Error
+	err := r.db.WithContext(ctx).Delete(&value, id).Error
 	if err != nil {
 		return nil, err
 	}
