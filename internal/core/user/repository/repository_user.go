@@ -3,15 +3,14 @@ package repository
 import (
 	"context"
 	"toktok-backend-v2/internal/core/domain"
-
-	"gorm.io/gorm"
+	"toktok-backend-v2/internal/database"
 )
 
 type UserRepository struct {
-	db *gorm.DB
+	db *database.Database
 }
 
-func NewUserRepository(db *gorm.DB) domain.UserRepository {
+func NewUserRepository(db *database.Database) domain.UserRepository {
 	userRepository := UserRepository{
 		db: db,
 	}

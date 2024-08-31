@@ -5,8 +5,7 @@ import (
 	"toktok-backend-v2/internal/core/user/delivery"
 	"toktok-backend-v2/internal/core/user/repository"
 	"toktok-backend-v2/internal/core/user/usecase"
-
-	"gorm.io/gorm"
+	"toktok-backend-v2/internal/database"
 )
 
 type userProvider struct {
@@ -15,7 +14,7 @@ type userProvider struct {
 	UserDelivery   delivery.UserDelivery
 }
 
-func Provide(db *gorm.DB) *userProvider {
+func Provide(db *database.Database) *userProvider {
 	userRepository := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	userDelivery := delivery.NewUserDelivery(userUsecase)
