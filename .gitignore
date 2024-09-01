@@ -24,3 +24,12 @@ go.work.sum
 # env file
 .env
 .toml
+
+# vendor
+vendor/
+
+# test
+*.test
+
+# about air
+tmp_app
