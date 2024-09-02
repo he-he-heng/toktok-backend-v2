@@ -40,3 +40,15 @@ func (s *Service) CreateUser(ctx context.Context, user *domain.User) (*domain.Us
 
 	return createdUser, nil
 }
+
+func (s *Service) GetUser(ctx context.Context, id int) (*domain.User, error) {
+	return s.userRepository.GetUser(ctx, id)
+}
+
+func (s *Service) UpdateUser(ctx context.Context, user *domain.User) (*domain.User, error) {
+	return s.userRepository.UpdateUser(ctx, user)
+}
+
+func (s *Service) DeleteUser(ctx context.Context, id int) (*domain.User, error) {
+	return s.userRepository.DeleteUser(ctx, id)
+}
