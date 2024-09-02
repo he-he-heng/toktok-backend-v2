@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import "toktok-backend-v2/config"
 
 func main() {
-	fmt.Println("hi")
+
+	// open config
+	config.New(".toml")
+
+	// database connection
+
 }

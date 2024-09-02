@@ -13,9 +13,9 @@ type Config struct {
 		Host            string
 		Port            string
 		Database        string
-		MaxPoolIdle     int
-		MaxPoolOpen     int
-		MaxPoolLifeTime int
+		MaxIdleConns    int
+		MaxOpenConns    int
+		ConnMaxLifeTime int
 	}
 }
 
