@@ -20,18 +20,14 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &userRepository
 }
 
-func (r *UserRepository) CreateUser(ctx context.Context, loginID string, hashedPassword string) (*domain.User, error) {
-	value := domain.User{
-		LoginID:  loginID,
-		Password: hashedPassword,
-	}
+func (r *UserRepository) CreateUser(ctx context.Context, user *domain.User) (*domain.User, error) {
 
-	err := r.db.WithContext(ctx).Create(&value).Error
+	err := r.db.WithContext(ctx).Create(user).Error
 	if err != nil {
 		return nil, repository.Wrap(err)
 	}
 
-	return &value, nil
+	return user, nil
 }
 
 func (r *UserRepository) GetUser(ctx context.Context, id int) (*domain.User, error) {
@@ -44,27 +40,14 @@ func (r *UserRepository) GetUser(ctx context.Context, id int) (*domain.User, err
 	return &dest, nil
 }
 
-func (r *UserRepository) UpdateUser(ctx context.Context, loginID *string, hashedPassword *string, email *string) (*domain.User, error) {
-	value := domain.User{}
+func (r *UserRepository) UpdateUser(ctx context.Context, user *domain.User) (*domain.User, error) {
 
-	if loginID != nil {
-		value.LoginID = *loginID
-	}
-
-	if hashedPassword != nil {
-		value.Password = *hashedPassword
-	}
-
-	if email != nil {
-		value.Email = email
-	}
-
-	err := r.db.WithContext(ctx).Save(&value).Error
+	err := r.db.WithContext(ctx).Save(user).Error
 	if err != nil {
 		return nil, repository.Wrap(err)
 	}
 
-	return &value, nil
+	return user, nil
 }
 
 func (r *UserRepository) DeleteUser(ctx context.Context, id int) (*domain.User, error) {
